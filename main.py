@@ -1,3 +1,4 @@
+import code
 from Book import Book
 from structures import*
 
@@ -23,6 +24,87 @@ def num_input():
     except ValueError:
             return num_input()
     return num
+
+def search():
+    answerS = input('''Ingrese el tipo de búsqueda que desea hacer:
+
+1. Por título
+2. Por serial
+    
+''')
+
+    while answerS != "1" and answerS != "2":
+            answerS = input('''Ingreso inválido. Ingrese el tipo de búsqueda que desea hacer:
+
+1. Por título
+2. Por serial
+    
+''')
+
+    if answerS == "1":
+        code = returnT()
+
+        if code == None:
+            print('\nEl libro que ingresó no fue encontrado, intente de nuevo')
+            search()
+
+        else:
+
+            hashC = hashCode(int(split(code)[-1]), int(split(code)[-2]))
+            book = searchT(hashC, code)
+            book.show_book()
+            returnTo()
+
+
+
+    else:
+        code = returnS()
+
+        if code == None:
+            print('\nEl libro que ingresó no fue encontrado, intente de nuevo')
+            search()
+
+        else:
+
+            hashC = hashCode(int(split(code)[-1]), int(split(code)[-2]))
+            book = searchT(hashC, code)
+            book.show_book()
+            returnTo()
+
+
+def searchT(hashC, code):
+
+    for books in allBooks[hashC]:
+        for book in books:
+            if code == book.code:
+                return book
+
+#Funciones encargadas de retornar el código del libro en caso de que se encuentre, o si devuelve None decirle al usario que vuelva a intentar
+def returnT():
+    print(titleCode_list)
+    answerT = input("\nIngrese el nombre del libro que desea buscar: ")
+
+    for elements in titleCode_list:
+
+        for key,value in elements.items():
+
+            if answerT == key:
+                return value
+
+
+
+def returnS():
+    print(titleCode_list)
+    answerS = input("\nIngrese el serial del libro que desea buscar: ")
+
+    for elements in serialCode_list:
+
+        for key,value in elements.items():
+
+            if answerS == key:
+                return value
+
+
 
 
 def returnTo():
@@ -93,6 +175,10 @@ def start():
     menu()
 
 def menu():
+    print(allBooks)
+    print(serialCode_list)
+    print(titleCode_list)
+
     print('''
 
      ___________________________________________________________
@@ -130,7 +216,7 @@ def menu():
     if option == "1":
         data_input()
     elif option == "2":
-        pass
+        search()
     elif option == "3":
         pass    
     elif option == "4":
@@ -158,17 +244,20 @@ def data_input():
 
     print('\n¿Cuántos libros se encuentran disponibles?')
 
-    numD = num_input()
+    numD = num_input() #Validación de input numérico
 
-    book = Book(code, title, serial, numD, 0)
+    book = Book(code, title, serial, numD, 0) #Se crea el objeto libro
 
-    book.show_book()
+    book.show_book() #Se muestran el libro al usuario
 
-    allBooks = hashCode(int(split(code)[-1]), int(split(code)[-2]), book)
+    allBooks = hashStructure(int(split(code)[-1]), int(split(code)[-2]), book) #Se ingresa a la bd el libro
 
-    print(allBooks)
+#Uso de las estructuras auxiliares
 
-    title_code(title, code)
+    titleCode_list = title_code(title, code) 
+
+    serialCode_list = serial_code(serial, code)
+
 
     returnTo()
 

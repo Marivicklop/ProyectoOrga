@@ -2,10 +2,18 @@ from Book import Book
 
 allBooks = [[], []]
 titleCode_list = []
+serialCode_list = []
 
-def hashCode(number1, number2, book):
-
+def hashCode(number1, number2):
+    
     hashC = (number1 + number2)%2
+
+    return hashC
+
+
+def hashStructure(number1, number2, book):
+
+    hashC = hashCode(number1, number2)
 
 #Función hash que permite dependiendo de la cota ubicar a cuál índice de la lista el libro será almacenado
 
@@ -45,13 +53,21 @@ def hashCode(number1, number2, book):
 
 def title_code(title, code):
 
-    titleCode = title + code
+    titleCode = {title: code}
 
     titleCode_list.append(titleCode)
 
-    titleCode_list.sort()
+
+
+    return titleCode_list 
+
+
+def serial_code(serial, code):
+
+    serialCode = {serial: code}
+
+    serialCode_list.append(serialCode)
 
 
 
-
-    print(titleCode_list)
+    return serialCode_list
