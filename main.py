@@ -1,29 +1,71 @@
 import code
 from Book import Book
 from structures import*
-
+#  ____________________________________________
+# |                                            |
+# |        FUNCIONES RESPECTO A:               |                                      
+# |                                            |
+# |____________________________________________|
+#
 
 def split(word):
     return [char for char in word]
 
-def serial_input():
-    serial = input('Ingrese el serial del libro:\n')
-    while len(serial) != 12:
-        serial = input('Input inválido. Ingrese el serial del libro:\n')
 
-    try:
-            serial = int(serial)
-    except ValueError:
-            return serial_input()
-    return serial
 
-def num_input():
-    num = input('Ingrese el número:\n')
-    try:
-            num = int(num)
-    except ValueError:
-            return num_input()
-    return num
+#  ____________________________________________
+# |                                            |
+# |        FUNCIONES RESPECTO A:               |                                      
+# |             PRINTS                         |
+# |____________________________________________|
+#        
+
+def start():
+    print('''
+  _      _ _                   __        _____   __  _     _ _           
+ | |    (_) |                 /_/       |  __ \ /_/ | |   | (_)          
+ | |     _| |__  _ __ ___ _ __ _  __ _  | |__) |   _| |__ | |_  ___ __ _ 
+ | |    | | '_ \| '__/ _ \ '__| |/ _` | |  ___/ | | | '_ \| | |/ __/ _` |
+ | |____| | |_) | | |  __/ |  | | (_| | | |   | |_| | |_) | | | (_| (_| |
+ |______|_|_.__/|_| _\___|_|  |_|\__,_| |_|    \__,_|_.__/|_|_|\___\__,_|
+           _        _    _             _           _   _
+          | |      |  \/  |           | |         | | | |                          
+        __| | ___  | \  / | __ _ _ __ | |__   __ _| |_| |_ __ _ _ __               
+       / _` |/ _ \ | |\/| |/ _` | '_ \| '_ \ / _` | __| __/ _` | '_ \              
+      | (_| |  __/ | |  | | (_| | | | | | | | (_| | |_| || (_| | | | |             
+       \__,_|\___| |_|  |_|\__,_|_| |_|_| |_|\__,_|\__|\__\__,_|_| |_|             
+                                                                               
+                                                                                   
+    
+                        .--.                   .---.
+                    .---|__|           .-.     |~~~|
+                    .--|===|--|_          |_|     |~~~|--.
+                    |  |===|  |'\     .---!~|  .--|   |--|
+                    |%%|   |  |.'\    |===| |--|%%|   |  |
+                    |%%|   |  |\.'\   |   | |__|  |   |  |
+                    |  |   |  | \  \  |===| |==|  |   |  |
+                    |  |   |__|  \.'\ |   |_|__|  |~~~|__|
+                    |  |===|--|   \.'\|===|~|--|%%|~~~|--|
+                    ^--^---'--^    `-'`---^-^--^--^---'--'
+
+
+                     ____________________________________
+                    |                                    | 
+                    |    Presione enter para ingresar    |   
+                    |____________________________________|
+    ''')
+
+    input()
+    menu()
+
+
+#  ____________________________________________
+# |                                            |
+# |        FUNCIONES RESPECTO A:               |                                      
+# |             BÚSQUEDA                       |
+# |____________________________________________|
+#        
+
 
 def search():
     answerS = input('''Ingrese el tipo de búsqueda que desea hacer:
@@ -99,6 +141,7 @@ def returnS():
 
     for elements in serialCode_list:
 
+
         for key,value in elements.items():
 
             if answerS == key:
@@ -115,6 +158,51 @@ def returnTo():
     else:
         exit()
 
+
+#  ____________________________________________
+# |                                            |
+# |        FUNCIONES RESPECTO A:               |                                      
+# |             PRÉSTAMO Y RETORNO             |
+# |____________________________________________|
+#        
+
+
+
+
+
+def borrowed():
+
+    #aquí va a ir la función que devolverá el objeto
+
+
+    book = returnVB()
+
+    n = num_input()
+
+    book.numD = book.numD - n
+
+    book.numD = book.numB + n
+
+    print(f'Se tomó prestado {n} libros y quedán disponibles un total de {book.numD} libros')
+
+def returnVB(titleBook):
+    #Hacer la función que retorne el objeto del libero
+    pass
+
+def returnBooks():
+
+    #aquí va a ir la función que devolverá el objeto
+
+
+    book = returnVB()
+
+    n = num_input()
+
+    book.numD = book.numD + n
+
+    book.numD = book.numB - n
+
+    print(f'Se devolvió {n} libros y quedán disponibles un total de {book.numD} libros')
 
 
 def answers():
@@ -136,43 +224,16 @@ def answers():
     else:
         return False
 
-def start():
-    print('''
-  _      _ _                   __        _____   __  _     _ _           
- | |    (_) |                 /_/       |  __ \ /_/ | |   | (_)          
- | |     _| |__  _ __ ___ _ __ _  __ _  | |__) |   _| |__ | |_  ___ __ _ 
- | |    | | '_ \| '__/ _ \ '__| |/ _` | |  ___/ | | | '_ \| | |/ __/ _` |
- | |____| | |_) | | |  __/ |  | | (_| | | |   | |_| | |_) | | | (_| (_| |
- |______|_|_.__/|_| _\___|_|  |_|\__,_| |_|    \__,_|_.__/|_|_|\___\__,_|
-           _        _    _             _           _   _
-          | |      |  \/  |           | |         | | | |                          
-        __| | ___  | \  / | __ _ _ __ | |__   __ _| |_| |_ __ _ _ __               
-       / _` |/ _ \ | |\/| |/ _` | '_ \| '_ \ / _` | __| __/ _` | '_ \              
-      | (_| |  __/ | |  | | (_| | | | | | | | (_| | |_| || (_| | | | |             
-       \__,_|\___| |_|  |_|\__,_|_| |_|_| |_|\__,_|\__|\__\__,_|_| |_|             
-                                                                               
-                                                                                   
-    
-                        .--.                   .---.
-                    .---|__|           .-.     |~~~|
-                    .--|===|--|_          |_|     |~~~|--.
-                    |  |===|  |'\     .---!~|  .--|   |--|
-                    |%%|   |  |.'\    |===| |--|%%|   |  |
-                    |%%|   |  |\.'\   |   | |__|  |   |  |
-                    |  |   |  | \  \  |===| |==|  |   |  |
-                    |  |   |__|  \.'\ |   |_|__|  |~~~|__|
-                    |  |===|--|   \.'\|===|~|--|%%|~~~|--|
-                    ^--^---'--^    `-'`---^-^--^--^---'--'
+
+#  ____________________________________________
+# |                                            |
+# |                  MENÚ                      |                                      
+# |                                            |
+# |____________________________________________|
+#        
 
 
-                     ____________________________________
-                    |                                    | 
-                    |    Presione enter para ingresar    |   
-                    |____________________________________|
-    ''')
 
-    input()
-    menu()
 
 def menu():
     print(allBooks)
@@ -218,13 +279,45 @@ def menu():
     elif option == "2":
         search()
     elif option == "3":
-        pass    
+        borrowed()    
     elif option == "4":
-        pass
+        returnBooks()
     elif option == "5":
         pass
     else:
         exit(0)
+
+#  ____________________________________________
+# |                                            |
+# |        FUNCIONES RESPECTO A:               |                                      
+# |        INPUTS                              |
+# |____________________________________________|
+#
+
+
+
+def serial_input():
+    serial = input('Ingrese el serial del libro:\n')
+    while len(serial) != 12:
+        serial = input('Input inválido. Ingrese el serial del libro:\n')
+
+    try:
+            serial = int(serial)
+    except ValueError:
+            return serial_input()
+    return serial
+
+
+
+def num_input():
+    num = input('Ingrese el número:\n')
+    try:
+            num = int(num)
+    except ValueError:
+            return num_input()
+    return num
+
+
 
 def data_input():
     code = input('Ingrese la cota del libro:\n')
@@ -262,6 +355,14 @@ def data_input():
     returnTo()
 
 
+
+
+#  ____________________________________________
+# |                                            |
+# |                 MENÚ                       |                                      
+# |                                            |
+# |____________________________________________|
+#        
 
 
 
