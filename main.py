@@ -172,57 +172,84 @@ def returnTo():
 
 def borrowed():
 
-    #aquí va a ir la función que devolverá el objeto
+    code = returnT()
+    
+    hashC = hashCode(int(split(code)[-1]), int(split(code)[-2]))
 
-
-    book = returnVB()
+    book = searchT(hashC, code)
 
     n = num_input()
 
-    book.numD = book.numD - n
 
-    book.numD = book.numB + n
+    book.numD = int(book.numD) - n
+
+    book.numB = int(book.numB) + n
 
     print(f'Se tomó prestado {n} libros y quedán disponibles un total de {book.numD} libros')
+    book.show_book()
 
-def returnVB(titleBook):
-    #Hacer la función que retorne el objeto del libero
-    pass
-
-def returnBooks():
-
-    #aquí va a ir la función que devolverá el objeto
+    returnTo()
 
 
-    book = returnVB()
+def returnedBooks():
+
+    code = returnT()
+    
+    hashC = hashCode(int(split(code)[-1]), int(split(code)[-2]))
+
+    book = searchT(hashC, code)
 
     n = num_input()
 
     book.numD = book.numD + n
 
-    book.numD = book.numB - n
+    book.numB = book.numB - n
 
     print(f'Se devolvió {n} libros y quedán disponibles un total de {book.numD} libros')
+    book.show_book()
+
+    returnTo()
 
 
-def answers():
-    option = input('''Ingrese el número de su respuesta:
-1. Sí 
-2. No
+#  ____________________________________________
+# |                                            |
+# |        FUNCIONES RESPECTO A:               |                                      
+# |        ELIMINACIÓN                         |
+# |____________________________________________|
+#
 
--->''')
-    while option != "1" and option != "2":
-            option = input('''Input inválido. Ingrese el número de su respuesta:
-1. Sí 
-2. No
+def deleteBook():
 
--->''')
+    code = returnT()
     
-    if option == "1":
-        return True
+    hashC = hashCode(int(split(code)[-1]), int(split(code)[-2]))
 
-    else:
-        return False
+    book = searchT(hashC, code)
+
+    boolval = delBook(book, hashC)
+
+    if boolval == True:
+    
+        pass
+
+
+    else:        
+
+        pass
+
+
+
+def delBook(book, hashC):
+
+    for books in allBooks[hashC]:
+        for bookI in books:
+
+            if book == bookI:
+                allBooks.remove(book)
+                return True
+
+    
+
 
 
 #  ____________________________________________
@@ -281,9 +308,9 @@ def menu():
     elif option == "3":
         borrowed()    
     elif option == "4":
-        returnBooks()
+        returnedBooks()
     elif option == "5":
-        pass
+        deleteBook()
     else:
         exit(0)
 
@@ -294,7 +321,24 @@ def menu():
 # |____________________________________________|
 #
 
+def answers():
+    option = input('''Ingrese el número de su respuesta:
+1. Sí 
+2. No
 
+-->''')
+    while option != "1" and option != "2":
+            option = input('''Input inválido. Ingrese el número de su respuesta:
+1. Sí 
+2. No
+
+-->''')
+    
+    if option == "1":
+        return True
+
+    else:
+        return False
 
 def serial_input():
     serial = input('Ingrese el serial del libro:\n')
